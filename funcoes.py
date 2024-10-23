@@ -39,10 +39,34 @@ def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
         frota[nome_navio] = lista_final
     return frota
 
+#ataca o návio e modifica o grid:
 def faz_jogada(tabuleiro, linha, coluna):
     if tabuleiro[linha][coluna] == 1:
         tabuleiro[linha][coluna] = 'X'
     else:
         tabuleiro[linha][coluna] = '-'
     return tabuleiro
+
+#modifica o grid: 1 - para posição do barco
+def posiciona_frota (dicionario_frota):
+    grid = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+    for lista in dicionario_frota.values():
+        for lista_int in lista:
+            for elemento in lista_int:
+                linha = elemento[0]
+                coluna = elemento[1]
+                grid[linha][coluna] = 1
+    return grid
+
 
