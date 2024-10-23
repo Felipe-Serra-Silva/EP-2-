@@ -69,4 +69,40 @@ def posiciona_frota (dicionario_frota):
                 grid[linha][coluna] = 1
     return grid
 
+#Verifica o numero de navios atingidos pelo inimigo:
+def afundados (dicionario_frota, tabuleiro):
 
+    navios_atingidos = 0
+    for lista in dicionario_frota.values():
+        for lista_int in lista:
+            tiros = 0
+            for elemento in lista_int:
+                if tabuleiro[elemento[0]][elemento[1]] == 'X':
+                    tiros +=1
+            if tiros == len(lista_int):
+                navios_atingidos += 1
+
+    return(navios_atingidos)
+
+#Verficia se a posição desejada pelo jogador, para alocar seu navio, está disponível:
+def posicao_valida(dicionario_frota, linha, coluna, orientacao, tamanho):
+
+    posicoes = define_posicoes(linha,coluna,orientacao,tamanho)
+
+    posicao_ocupada = 0
+    for lista in dicionario_frota.values():
+        for lista_int in lista:
+            for elemento in lista_int:
+                for lugar in posicoes:
+                    if lugar == elemento:
+                        posicao_ocupada +=1
+    for lugar in posicoes:
+        if lugar[0] > 9 or lugar[0] < 0:
+                            posicao_ocupada +=1
+        if lugar[1] > 9 or lugar[1] < 0:
+            posicao_ocupada +=1
+
+    if posicao_ocupada == 0:
+        return(True)
+    else:
+        return(False)
