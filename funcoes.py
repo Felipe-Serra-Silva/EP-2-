@@ -1,4 +1,4 @@
-# Define posições do navio no grid:
+# Define posições do navio:
 def define_posicoes(linha,coluna,orientacao,tamanho):
     posicao_navio = []
     if orientacao == "vertical":
@@ -98,7 +98,7 @@ def posicao_valida(dicionario_frota, linha, coluna, orientacao, tamanho):
                         posicao_ocupada +=1
     for lugar in posicoes:
         if lugar[0] > 9 or lugar[0] < 0:
-                            posicao_ocupada +=1
+            posicao_ocupada +=1
         if lugar[1] > 9 or lugar[1] < 0:
             posicao_ocupada +=1
 
