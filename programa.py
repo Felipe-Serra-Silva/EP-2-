@@ -1,4 +1,6 @@
 from funcoes import *
+import random
+random.seed(2)
 
 #cria dicionario para facilitar o while rodar para cada tipo de navio:
 dicionario_tamanho = {
@@ -94,6 +96,7 @@ print(monta_tabuleiros(tabuleiro_jogador,tabuleiro_oponente))
 
 jogando = True
 jogadas_feitas = []
+jogadas_oponentes = []
 
 while jogando == True:
     #pergunta linha e coluna, com validação:
@@ -137,9 +140,32 @@ while jogando == True:
     #verifica se atingiu todos:
     quantidade_afundados = afundados(frota_oponente,tabuleiro_oponente)
     if quantidade_afundados == 10:
+        print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
     else:
-        print(monta_tabuleiros(tabuleiro_jogador,tabuleiro_oponente))
 
-print('Parabéns! Você derrubou todos os navios do seu oponente!')
+        #oponente ataca jogador:
+        oponete = 0
+        while oponete == 0:
+            linha_sorteada = random.randint(0,9)
+            coluna_sorteada = random.randint(0,9)
+
+            jogada_oponente = [linha_sorteada,coluna_sorteada]
+            if jogada_oponente not in jogadas_oponentes:
+                jogadas_oponentes.append(jogada_oponente)
+                oponete = -1
+        
+        print(f'Seu oponente está atacando na linha {linha_sorteada} e coluna {coluna_sorteada}')
+
+        #Verifica se oponente eliminou o jogador:
+        tabuleiro_jogador = faz_jogada(tabuleiro_jogador,linha_sorteada,coluna_sorteada)
+        oponente_atacou =  afundados(dicionario_frota, tabuleiro_jogador)
+
+        if oponente_atacou == 10:
+            print('Xi! O oponente derrubou toda a sua frota =(')
+            jogando = False
+        else:
+            #atualiza o tabuleiro:
+            print(monta_tabuleiros(tabuleiro_jogador,tabuleiro_oponente))
+
         
